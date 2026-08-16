@@ -131,17 +131,14 @@
             color: var(--accent-color);
         }
 
+        
         /* --- HERO SECTION & COUNTDOWN --- */
         .hero {
             min-height: 100vh;
-            /* Update background-image to point to your new image file path or URL */
             background: linear-gradient(rgba(59, 42, 30, 0.45), rgba(59, 42, 30, 0.45)), 
-                        url('banner.jpeg') no-repeat;
+                        url('bannerv2.jpeg') no-repeat;
             
-            /* Dynamic scaling & positioning */
             background-size: cover;
-            background-position: center 70%; /* Focuses vertical alignment on the couple near the bottom */
-            
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -149,6 +146,28 @@
             text-align: center;
             color: #FFFFFF;
             padding: 6rem 1rem 3rem 1rem;
+        }
+
+        /* MOBILE SCREENS (Your working mobile alignment) */
+        @media (max-width: 768px) {
+            .hero {
+                background-position: center 30%;
+            }
+        }
+
+        /* DESKTOP / WIDE SCREENS (Fixes neck-down cropping) */
+        @media (min-width: 769px) {
+            .hero {
+                /* Pulls the image down so faces stay centered in the wider viewport */
+                background-position: center 40%; 
+            }
+        }
+
+        /* EXTRA WIDE MONITORS / HIGH-RES DISPLAYS */
+        @media (min-width: 1200px) {
+            .hero {
+                background-position: center 50%; 
+            }
         }
 
         .hero h3 {
@@ -880,6 +899,9 @@
     <footer>
         <p>Jomer & Deserie • 2026</p>
         <p>We can't wait to celebrate with you!</p>
+        <div class="developer-credit">
+            Created by <a href="https://profile.joventria.dev" target="_blank" rel="noopener noreferrer">joventria.dev</a>
+        </div>
     </footer>
 
     <!-- JAVASCRIPT -->
