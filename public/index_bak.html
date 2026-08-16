@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYT8GGGN5H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-PYT8GGGN5H');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation | Jomer & Deserie</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #FAFAFA;
+            --card-bg: #FFFFFF;
+            --primary-color: #2C3E35; /* Deep Sage Green */
+            --accent-color: #D4AF37;  /* Soft Gold */
+            --text-dark: #333333;
+            --text-muted: #666666;
+            --border-color: #E2E8F0;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            color: var(--primary-color);
+        }
+
+        /* --- FLOATING MUSIC BUTTON --- */
+        .music-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: var(--primary-color);
+            color: #FFFFFF;
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transition: var(--transition);
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .music-toggle svg {
+            width: 22px;
+            height: 22px;
+            fill: #FFFFFF;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- HERO SECTION & COUNTDOWN --- */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #FFFFFF;
+            padding: 6rem 1rem 3rem 1rem;
+        }
+
+        .hero h3 {
+            color: #FFFFFF;
+            font-size: 1.25rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h1 {
+            color: #FFFFFF;
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .hero p.wedding-date {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        /* Countdown Display */
+        .countdown-container {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 0.8rem 1.2rem;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 600;
+            line-height: 1;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 0.3rem;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border: 1px solid var(--primary-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: #FFFFFF;
+            border-color: #FFFFFF;
+        }
+
+        /* --- SECTIONS (GENERAL) --- */
+        section {
+            padding: 5rem 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+        }
+
+        /* --- COUPLE SECTION --- */
+        .couple-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .couple-card {
+            background: var(--card-bg);
+            padding: 2.5rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .couple-card h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .couple-card p.role {
+            color: var(--accent-color);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        /* --- HOW WE MET TIMELINE --- */
+        .story-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .story-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: var(--border-color);
+            transform: translateX(-50%);
+        }
+
+        .story-event {
+            position: relative;
+            margin-bottom: 2.5rem;
+            width: 50%;
+            padding: 0 2rem;
+        }
+
+        .story-event:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .story-event:nth-child(even) {
+            left: 50%;
+            text-align: left;
+        }
+
+        .story-event::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            width: 14px;
+            height: 14px;
+            background: var(--accent-color);
+            border: 3px solid var(--card-bg);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .story-event:nth-child(odd)::after {
+            right: -7px;
+        }
+
+        .story-event:nth-child(even)::after {
+            left: -7px;
+        }
+
+        .story-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .story-card .event-date {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .story-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .story-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            aspect-ratio: 4 / 5;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* --- MP4 VIDEO SECTION --- */
+        .video-section {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            border-radius: 12px;
+            padding: 4rem 2rem;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .video-section .section-title {
+            color: #FFFFFF;
+        }
+
+        .video-section .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .video-wrapper {
+            max-width: 850px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: #000000;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        /* --- SCHEDULE & MAP --- */
+        .details-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .schedule-list {
+            list-style: none;
+        }
+
+        .schedule-item {
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-left: 4px solid var(--primary-color);
+            margin-bottom: 1rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .schedule-item h4 {
+            font-size: 1.3rem;
+        }
+
+        .schedule-item .time {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 0.85rem;
+        }
+
+        .map-container {
+            height: 100%;
+            min-height: 350px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* --- RSVP FORM (GOOGLE FORM BACKEND) --- */
+        .rsvp-form {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-submit {
+            width: 100%;
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .form-submit:hover {
+            background-color: #1f2d26;
+        }
+
+        /* --- LIGHTBOX MODAL --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 4px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 3rem 1rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+
+            .countdown-container {
+                gap: 0.5rem;
+            }
+
+            .countdown-box {
+                padding: 0.6rem 0.8rem;
+                min-width: 65px;
+            }
+
+            .countdown-number {
+                font-size: 1.6rem;
+            }
+
+            /* Timeline Mobile Fix */
+            .story-timeline::before {
+                left: 1rem;
+            }
+
+            .story-event {
+                width: 100%;
+                padding-left: 2.5rem;
+                padding-right: 0;
+            }
+
+            .story-event:nth-child(odd),
+            .story-event:nth-child(even) {
+                left: 0;
+                text-align: left;
+            }
+
+            .story-event:nth-child(odd)::after,
+            .story-event:nth-child(even)::after {
+                left: calc(1rem - 7px);
+            }
+
+            .details-container {
+                grid-template-columns: 1fr;
+            }
+
+            .rsvp-form {
+                padding: 1.5rem;
+            }
+
+            .video-section {
+                padding: 3rem 1rem;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- AUDIO ELEMENT & FLOATING CONTROL BUTTON -->
+    <!-- Replace 'path/to/your-song.mp3' with your audio file or link -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="path/to/your-song.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="music-toggle" id="musicToggleBtn" onclick="toggleMusic()">
+        <!-- Music Note Icon -->
+        <svg id="musicIcon" viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <a href="#" class="nav-logo">J & D</a>
+        <ul class="nav-links">
+            <li><a href="#about">Our Story</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#video">Save The Date</a></li>
+            <li><a href="#details">Event Info</a></li>
+            <li><a href="#rsvp">RSVP</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <h3>We Are Getting Married</h3>
+        <h1>Jomer & Deserie</h1>
+        <p class="wedding-date">December 29, 2026 • Quezon City, Metro Manila</p>
+        
+        <!-- COUNTDOWN TIMER CONTAINER -->
+        <div class="countdown-container" id="countdown">
+            <div class="countdown-box">
+                <span class="countdown-number" id="cd-days">00</span>
+                <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="cd-hours">00</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="cd-minutes">00</span>
+                <span class="countdown-label">Mins</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-number" id="cd-seconds">00</span>
+                <span class="countdown-label">Secs</span>
+            </div>
+        </div>
+
+        <a href="#rsvp" class="btn">RSVP Now</a>
+    </header>
+
+    <!-- COUPLE & OUR STORY SECTION -->
+    <section id="about">
+        <h2 class="section-title">The Happy Couple</h2>
+        <p class="section-subtitle">Join us in celebrating our next chapter</p>
+        
+        <!-- Individual Descriptions -->
+        <div class="couple-grid">
+            <div class="couple-card">
+                <h3>Jomer Alabastro</h3>
+                <p class="role">The Groom</p>
+                <p>An avid traveler and coffee enthusiast who found his permanent home in Bebang's heart.</p>
+            </div>
+            <div class="couple-card">
+                <h3>Deserie Jumawan </h3>
+                <p class="role">The Bride</p>
+                <p>A lover of art, nature, and simple moments, ready to embark on life's biggest adventure.</p>
+            </div>
+        </div>
+
+        <!-- HOW WE MET TIMELINE -->
+        <h2 class="section-title" style="font-size: 2rem;">How We Met</h2>
+        <p class="section-subtitle">Our Journey Together</p>
+
+        <div class="story-timeline">
+            <!-- Timeline Item 1 -->
+            <div class="story-event">
+                <div class="story-card">
+                    <span class="event-date">October 2021</span>
+                    <h4>First Encounter</h4>
+                    <p>We crossed paths at a cozy local coffee shop where a chance conversation about shared favorite books turned into hours of endless talking.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 2 -->
+            <div class="story-event">
+                <div class="story-card">
+                    <span class="event-date">December 2022</span>
+                    <h4>Our First Adventure</h4>
+                    <p>Took our very first weekend road trip together, solidifying our shared love for spontaneous travels, good food, and late-night talks.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 3 -->
+            <div class="story-event">
+                <div class="story-card">
+                    <span class="event-date">February 2025</span>
+                    <h4>The Proposal</h4>
+                    <p>Surrounded by scenic mountain views at sunset, Jomer got down on one knee and asked the easiest question Bebang ever had to answer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRENUP GALLERY SECTION -->
+    <section id="gallery">
+        <h2 class="section-title">Prenup Gallery</h2>
+        <p class="section-subtitle">A glimpse into our pre-wedding moments</p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80" alt="Prenup Photo 1">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80" alt="Prenup Photo 2">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80" alt="Prenup Photo 3">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80" alt="Prenup Photo 4">
+            </div>
+        </div>
+    </section>
+
+    <!-- MP4 PRENUP VIDEO SECTION -->
+    <section id="video" class="video-section">
+        <h2 class="section-title">Save The Date</h2>
+        <p class="section-subtitle">Watch our pre-wedding video</p>
+
+        <div class="video-wrapper">
+            <video 
+                id="prenupVideo"
+                controls 
+                preload="metadata" 
+                poster="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80">
+                <source src="path/to/your-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <!-- EVENT DETAILS & MAP -->
+    <section id="details">
+        <h2 class="section-title">When & Where</h2>
+        <p class="section-subtitle">Event details and schedule</p>
+
+        <div class="details-container">
+            <ul class="schedule-list">
+                <li class="schedule-item">
+                    <span class="time">3:30 PM</span>
+                    <h4>Wedding Ceremony</h4>
+                    <p>St. Ignatius Chapel<br>Quezon City, Metro Manila</p>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">6:00 PM</span>
+                    <h4>Cocktail Hour & Reception</h4>
+                    <p>The Garden Hall Venue<br>Quezon City, Metro Manila</p>
+                </li>
+                <li class="schedule-item">
+                    <span class="time">7:30 PM</span>
+                    <h4>Dinner & Celebration</h4>
+                    <p>Main Dining Ballroom</p>
+                </li>
+            </ul>
+
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61776.6267812165!2d121.01700205!3d14.6488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b71137c31a01%3A0x30f0037a34ec8d0!2sQuezon%20City%2C%20Metro%20Manila!5e0!3m2!1sen!2sph!4v1700000000000!5m2!1sen!2sph" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP SECTION (GOOGLE FORM INTEGRATION) -->
+    <section id="rsvp">
+        <h2 class="section-title">RSVP</h2>
+        <p class="section-subtitle">Please respond by November 15, 2026</p>
+
+        <!-- Hidden iframe to submit quietly without redirecting -->
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { showConfirmation(); }"></iframe>
+
+        <form 
+            class="rsvp-form" 
+            id="weddingRsvpForm" 
+            action="https://docs.google.com/forms/d/e/YOUR_GOOGLE_FORM_ID_HERE/formResponse" 
+            method="POST" 
+            target="hidden_iframe" 
+            onsubmit="submitted=true;">
+            
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="entry.111111111" required placeholder="e.g., Jane Doe">
+            </div>
+
+            <div class="form-group">
+                <label for="attendance">Will you attend?</label>
+                <select id="attendance" name="entry.222222222" required>
+                    <option value="">Select an option</option>
+                    <option value="Joyfully Accepts">Joyfully Accepts</option>
+                    <option value="Regretfully Declines">Regretfully Declines</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="guests">Number of Guests (including yourself)</label>
+                <input type="number" id="guests" name="entry.333333333" min="1" max="5" value="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="dietary">Dietary Restrictions or Notes</label>
+                <textarea id="dietary" name="entry.444444444" rows="3" placeholder="e.g., Vegetarian, Food allergies, etc."></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">Send RSVP</button>
+        </form>
+
+        <div id="rsvpSuccessMessage" style="display: none; text-align: center; padding: 2rem; background: var(--card-bg); border-radius: 8px; border: 1px solid var(--border-color); max-width: 600px; margin: 0 auto;">
+            <h3 style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary-color);">Thank You!</h3>
+            <p>Your response has been successfully submitted. We can't wait to celebrate with you!</p>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX FOR GALLERY -->
+    <div class="lightbox" id="lightboxModal" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" alt="Enlarged photo">
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Jomer & Deserie • 2026</p>
+        <p>We can't wait to celebrate with you!</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Track Google Form Submission State
+        let submitted = false;
+
+        function showConfirmation() {
+            document.getElementById('weddingRsvpForm').style.display = 'none';
+            document.getElementById('rsvpSuccessMessage').style.display = 'block';
+        }
+
+        // Lightbox Handler
+        function openLightbox(element) {
+            const imgSrc = element.querySelector('img').src;
+            const lightbox = document.getElementById('lightboxModal');
+            const lightboxImg = document.getElementById('lightboxImg');
+            
+            lightboxImg.src = imgSrc;
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').style.display = 'none';
+        }
+
+        // --- COUNTDOWN TIMER SCRIPT ---
+        const targetDate = new Date("December 29, 2026 15:30:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById("cd-days").innerText = days < 10 ? '0' + days : days;
+                document.getElementById("cd-hours").innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById("cd-minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById("cd-seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+            } else {
+                document.getElementById("countdown").innerHTML = "<h3>The Big Day is Here!</h3>";
+            }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // --- BACKGROUND MUSIC & AUTOPLAY HANDLER ---
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicToggleBtn');
+        let musicStarted = false;
+
+        function startMusic() {
+            if (!musicStarted) {
+                bgMusic.play().then(() => {
+                    musicStarted = true;
+                    musicBtn.style.background = 'var(--primary-color)';
+                }).catch(err => {
+                    console.log("Autoplay blocked waiting for user interaction:", err);
+                });
+            }
+        }
+
+        function toggleMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicStarted = true;
+                musicBtn.style.opacity = '1';
+            } else {
+                bgMusic.pause();
+                musicBtn.style.opacity = '0.5';
+            }
+        }
+
+        // Trigger playback on the first user interaction anywhere on the document
+        document.addEventListener('click', startMusic, { once: true });
+        document.addEventListener('touchstart', startMusic, { once: true });
+        document.addEventListener('scroll', startMusic, { once: true });
+
+        // Pause background music if guest plays the Save-the-Date Video
+        const prenupVideo = document.getElementById('prenupVideo');
+        if (prenupVideo) {
+            prenupVideo.addEventListener('play', () => {
+                if (!bgMusic.paused) {
+                    bgMusic.pause();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
