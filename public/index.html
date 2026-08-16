@@ -134,8 +134,14 @@
         /* --- HERO SECTION & COUNTDOWN --- */
         .hero {
             min-height: 100vh;
+            /* Update background-image to point to your new image file path or URL */
             background: linear-gradient(rgba(59, 42, 30, 0.45), rgba(59, 42, 30, 0.45)), 
-                        url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+                        url('banner.jpeg') no-repeat;
+            
+            /* Dynamic scaling & positioning */
+            background-size: cover;
+            background-position: center 70%; /* Focuses vertical alignment on the couple near the bottom */
+            
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -740,16 +746,31 @@
         
         <div class="gallery-grid">
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80" alt="Prenup Photo 1">
+                <img src="album/IMG_5784.jpeg" alt="Prenup Photo 1">
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80" alt="Prenup Photo 2">
+                <img src="album/IMG_5785.jpeg" alt="Prenup Photo 2">
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80" alt="Prenup Photo 3">
+                <img src="album/IMG_5794.jpeg" alt="Prenup Photo 3">
             </div>
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80" alt="Prenup Photo 4">
+                <img src="album/IMG_5795.jpeg" alt="Prenup Photo 4">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="album/IMG_5800.jpeg" alt="Prenup Photo 5">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="album/IMG_5858.jpeg" alt="Prenup Photo 6">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="album/IMG_5859.jpeg" alt="Prenup Photo 7">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="album/IMG_5860.jpeg" alt="Prenup Photo 8">
+            </div>
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="album/IMG_5861.jpeg" alt="Prenup Photo 9">
             </div>
         </div>
     </section>
