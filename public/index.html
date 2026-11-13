@@ -51,12 +51,144 @@
             background-color: var(--bg-color);
             color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Lock scrolling while on the standalone cover page */
+        body.locked {
+            overflow: hidden;
+            height: 100vh;
         }
 
         h1, h2, h3, h4 {
             font-family: var(--font-serif);
             font-weight: 400;
             color: var(--primary-color);
+        }
+
+        /* --- STANDALONE COVER PAGE (CANVA-STYLE ENVELOPE) --- */
+        #coverPage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(rgba(59, 42, 30, 0.6), rgba(59, 42, 30, 0.6)), 
+                        url('bannerv2.jpeg') no-repeat center center/cover;
+            z-index: 999999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+        }
+
+        #coverPage.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .envelope-container {
+            width: 100%;
+            max-width: 440px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+            position: relative;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .envelope-flap-header {
+            width: 100%;
+            height: 130px;
+            background: #EAE3D9;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .envelope-flap-triangle {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 130px;
+            background: #DFD7CC;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+        }
+
+        .envelope-seal {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 54px;
+            height: 54px;
+            background: var(--primary-color);
+            border: 3px solid var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+
+        .envelope-content {
+            padding: 2.5rem 2rem 3rem 2rem;
+            background: var(--card-bg);
+        }
+
+        .envelope-content h3 {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+        }
+
+        .envelope-content h1 {
+            font-size: 3rem;
+            font-style: italic;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .envelope-content p.date-sub {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+
+        .open-invitation-btn {
+            display: inline-block;
+            padding: 0.85rem 2.2rem;
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            border: 1px solid var(--primary-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .open-invitation-btn:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
         }
 
         /* --- FLOATING MUSIC BUTTON --- */
@@ -148,25 +280,15 @@
             padding: 6rem 1rem 3rem 1rem;
         }
 
-        /* MOBILE SCREENS (Your working mobile alignment) */
         @media (max-width: 768px) {
             .hero {
                 background-position: center 30%;
             }
         }
 
-        /* DESKTOP / WIDE SCREENS (Fixes neck-down cropping) */
         @media (min-width: 769px) {
             .hero {
-                /* Pulls the image down so faces stay centered in the wider viewport */
                 background-position: center 40%; 
-            }
-        }
-
-        /* EXTRA WIDE MONITORS / HIGH-RES DISPLAYS */
-        @media (min-width: 1200px) {
-            .hero {
-                background-position: center 50%; 
             }
         }
 
@@ -380,66 +502,227 @@
             font-size: 0.95rem;
         }
 
-        /* --- GALLERY SECTION --- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .gallery-item {
+        /* --- SMOOTH CROSS-FADE SLIDESHOW STYLES --- */
+        .slideshow-container {
             position: relative;
-            overflow: hidden;
-            border-radius: 8px;
+            max-width: 450px;
             aspect-ratio: 4 / 5;
-            cursor: pointer;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 8px;
             border: 1px solid var(--border-color);
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(59, 42, 30, 0.1);
+            cursor: pointer;
         }
 
-        .gallery-item img {
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+        }
+
+        .slide.active-slide {
+            opacity: 1;
+            visibility: visible;
+            position: relative;
+        }
+
+        .slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* --- MP4 VIDEO SECTION --- */
-        .video-section {
-            background-color: var(--primary-color);
+        /* Navigation Arrows */
+        .slide-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(92, 59, 36, 0.7);
             color: #FFFFFF;
-            border-radius: 12px;
-            padding: 4rem 2rem;
-            margin: 2rem auto;
+            padding: 14px;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            user-select: none;
+            z-index: 10;
+        }
+
+        .slide-nav-btn:hover {
+            background-color: var(--primary-color);
+        }
+
+        .slide-nav-btn.prev {
+            left: 10px;
+        }
+
+        .slide-nav-btn.next {
+            right: 10px;
+        }
+
+        /* Dots Indicator */
+        .slide-dots-container {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 10px;
+            width: 10px;
+            margin: 0 4px;
+            background-color: var(--border-color);
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active, .dot:hover {
+            background-color: var(--primary-color);
+        }
+
+        /* --- WEDDING THEME & COLOR PALETTE SECTION (CENTERED) --- */
+        .theme-section {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 4rem auto;
             text-align: center;
         }
 
-        .video-section .section-title {
-            color: #FFFFFF;
+        .palette-container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            max-width: 1050px;
+            margin: 0 auto 3.5rem auto;
+            text-align: center;
+            overflow-x: auto;
+            padding-bottom: 1rem;
         }
 
-        .video-section .section-subtitle {
-            color: rgba(248, 246, 240, 0.75);
+        .color-swatch-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            flex: 0 0 auto;
         }
 
-        .video-wrapper {
+        .color-circle {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            box-shadow: 0 6px 15px rgba(59, 42, 30, 0.15);
+            margin-bottom: 0.8rem;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .color-circle:hover {
+            transform: scale(1.08);
+        }
+
+        .color-name {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .color-hex {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        /* Attire Guidelines & Casual Dress Examples */
+        .attire-guide {
             max-width: 850px;
             margin: 0 auto;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(59, 42, 30, 0.3);
-            background: #000000;
+            text-align: center;
         }
 
-        .video-wrapper video {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 8px;
+        .attire-guide h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
         }
+
+        .attire-guide p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .attire-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            text-align: left;
+            margin-top: 2rem;
+        }
+
+        .attire-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(59, 42, 30, 0.03);
+        }
+
+        .attire-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .attire-card p.dress-code-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .attire-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .attire-card ul li {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-bottom: 0.6rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+
+        .attire-card ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
 
         /* --- SCHEDULE & MAP --- */
         .details-container {
@@ -602,7 +885,6 @@
                 font-size: 1.6rem;
             }
 
-            /* Timeline Mobile Fix */
             .story-timeline::before {
                 left: 1rem;
             }
@@ -631,15 +913,27 @@
             .rsvp-form {
                 padding: 1.5rem;
             }
-
-            .video-section {
-                padding: 3rem 1rem;
-                border-radius: 0;
-            }
         }
     </style>
 </head>
-<body>
+<body class="locked">
+
+    <!-- STANDALONE COVER PAGE (ENVELOPE SCREEN) -->
+    <div id="coverPage">
+        <div class="envelope-container" onclick="openInvitation()">
+            <div class="envelope-flap-header">
+                <div class="envelope-flap-triangle"></div>
+                <div class="envelope-seal">J&D</div>
+            </div>
+            
+            <div class="envelope-content">
+                <h3>Wedding Invitation</h3>
+                <h1>Jomer & Deserie</h1>
+                <p class="date-sub">December 29, 2026</p>
+                <button class="open-invitation-btn">Open Invitation</button>
+            </div>
+        </div>
+    </div>
 
     <!-- AUDIO ELEMENT & FLOATING CONTROL BUTTON -->
     <audio id="bgMusic" loop preload="auto">
@@ -660,7 +954,7 @@
         <ul class="nav-links">
             <li><a href="#about">Our Story</a></li>
             <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#video">Save The Date</a></li>
+            <li><a href="#theme">Theme</a></li>
             <li><a href="#details">Event Info</a></li>
             <li><a href="#rsvp">RSVP</a></li>
         </ul>
@@ -669,7 +963,7 @@
     <!-- HERO SECTION -->
     <header class="hero">
         <h3>We Are Getting Married</h3>
-        <p>With grateful hearts, we invite you to celebrate the beautiful journey of our love, from the day our story began to the day we promised to spend forever together.<p>
+        <p>With grateful hearts, we invite you to celebrate the beautiful journey of our love, from the day our story began to the day we promised to spend forever together.</p>
         <h1>Jomer & Deserie</h1>
         <p class="wedding-date">December 29, 2026 • San Jose, Batangas</p>
         
@@ -758,58 +1052,127 @@
         </div>
     </section>
 
-    <!-- PRENUP GALLERY SECTION -->
+    <!-- PRENUP GALLERY SLIDESHOW SECTION -->
     <section id="gallery">
         <h2 class="section-title">Prenup Gallery</h2>
         <p class="section-subtitle">A glimpse into our pre-wedding moments</p>
         
-        <div class="gallery-grid">
-            <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="album/IMG_5784.jpeg" alt="Prenup Photo 1">
+        <div class="slideshow-container" onclick="openLightboxFromSlide(this)">
+            <!-- Slide Items -->
+            <div class="slide active-slide">
+                <img src="album/IMG_5794.jpeg" alt="Prenup Photo 1">
             </div>
-            <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="album/IMG_5785.jpeg" alt="Prenup Photo 2">
+            <div class="slide">
+                <img src="album/IMG_5795.jpeg" alt="Prenup Photo 2">
             </div>
-            <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="album/IMG_5794.jpeg" alt="Prenup Photo 3">
+            <div class="slide">
+                <img src="album/IMG_5868.jpeg" alt="Prenup Photo 3">
             </div>
-            <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="album/IMG_5795.jpeg" alt="Prenup Photo 4">
+            <div class="slide">
+                <img src="album/IMG_5862.jpeg" alt="Prenup Photo 4">
             </div>
-            <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="album/IMG_5800.jpeg" alt="Prenup Photo 5">
+            <div class="slide">
+                <img src="album/IMG_5779.jpeg" alt="Prenup Photo 5">
             </div>
-            <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="album/IMG_5858.jpeg" alt="Prenup Photo 6">
+            <div class="slide">
+                <img src="album/IMG_5860.jpeg" alt="Prenup Photo 6">
             </div>
-            <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="album/IMG_5859.jpeg" alt="Prenup Photo 7">
+            <div class="slide">
+                <img src="album/IMG_5873.jpeg" alt="Prenup Photo 7">
             </div>
-            <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="album/IMG_5860.jpeg" alt="Prenup Photo 8">
+            <div class="slide">
+                <img src="album/IMG_5872.jpeg" alt="Prenup Photo 8">
             </div>
-            <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="album/IMG_5861.jpeg" alt="Prenup Photo 9">
+            <div class="slide">
+                <img src="album/IMG_5784.jpeg" alt="Prenup Photo 9">
+            </div>
+            <div class="slide">
+                <img src="album/IMG_5858.jpeg" alt="Prenup Photo 11">
+            </div>
+            <div class="slide">
+                <img src="album/IMG_5785.jpeg" alt="Prenup Photo 12">
+            </div>
+            <div class="slide">
+                <img src="album/IMG_5859.jpeg" alt="Prenup Photo 9">
+            </div>
+
+            <!-- Navigation Arrows -->
+            <a class="slide-nav-btn prev" onclick="event.stopPropagation(); plusSlides(-1)">&#10094;</a>
+            <a class="slide-nav-btn next" onclick="event.stopPropagation(); plusSlides(1)">&#10095;</a>
+        </div>
+
+        <!-- Dot Indicators -->
+        <div class="slide-dots-container" id="slideDots"></div>
+    </section>
+
+    <!-- WEDDING THEME & COLOR PALETTE SECTION -->
+    <section class="theme-section" id="theme">
+        <h2 class="section-title">Wedding Theme & Attire</h2>
+        <p class="section-subtitle">Coffee Color Palette & Casual Dress Code</p>
+
+        <!-- All 6 Circular Color Swatches in a Single Row -->
+        <div class="palette-container">
+            <div class="color-swatch-card">
+                <div class="color-circle" style="background-color: #fff7e8;"></div>
+                <span class="color-name">Foam</span>
+                <span class="color-hex">#fff7e8</span>
+            </div>
+            <div class="color-swatch-card">
+                <div class="color-circle" style="background-color: #cfab71;"></div>
+                <span class="color-name">Crema</span>
+                <span class="color-hex">#cfab71</span>
+            </div>
+            <div class="color-swatch-card">
+                <div class="color-circle" style="background-color: #7f5e35;"></div>
+                <span class="color-name">Roast</span>
+                <span class="color-hex">#7f5e35</span>
+            </div>
+            <div class="color-swatch-card">
+                <div class="color-circle" style="background-color: #713105;"></div>
+                <span class="color-name">Espresso</span>
+                <span class="color-hex">#713105</span>
+            </div>
+            <div class="color-swatch-card">
+                <div class="color-circle" style="background-color: #4f351c;"></div>
+                <span class="color-name">Grounds</span>
+                <span class="color-hex">#4f351c</span>
+            </div>
+            <div class="color-swatch-card">
+                <div class="color-circle" style="background-color: #341100;"></div>
+                <span class="color-name">Noir</span>
+                <span class="color-hex">#341100</span>
+            </div>
+        </div>
+
+        <!-- Casual Attire Guidelines & Inspiration -->
+        <div class="attire-guide">
+            <h3>Casual Attire Guidelines</h3>
+            <p>We kindly request our guests to dress in casual attire matching our coffee color palette (Foam, Crema, Roast, Espresso, Grounds, and Noir).</p>
+
+            <div class="attire-cards-grid">
+                <div class="attire-card">
+                    <h4>For Gentlemen</h4>
+                    <p class="dress-code-tag">Casual & Smart Casual</p>
+                    <ul>
+                        <li>Cream, beige, or khaki linen/cotton button-down shirts (Foam or Crema tones)</li>
+                        <li>Casual trousers, chinos, or slacks in roast, brown, or taupe</li>
+                        <li>Optional: Casual blazer or jacket in earth tones</li>
+                        <li>Comfortable leather shoes or loafers</li>
+                    </ul>
+                </div>
+                <div class="attire-card">
+                    <h4>For Ladies</h4>
+                    <p class="dress-code-tag">Casual & Elegant Dresses</p>
+                    <ul>
+                        <li>Casual midi or maxi dresses in crema, taupe, or earth tones</li>
+                        <li>Chic separates or jumpsuits in palette colors</li>
+                        <li>Comfortable footwear (wedges, flats, or block heels)</li>
+                        <li>Minimalist accessories to complement the coffee theme</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
-
-    <!-- MP4 PRENUP VIDEO SECTION -->
-    <!-- <section id="video" class="video-section">
-        <h2 class="section-title">Save The Date</h2>
-        <p class="section-subtitle">Watch our pre-wedding video</p>
-
-        <div class="video-wrapper">
-            <video 
-                id="prenupVideo"
-                controls 
-                preload="metadata" 
-                poster="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80">
-                <source src="path/to/your-video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    </section> -->
 
     <!-- EVENT DETAILS & MAP -->
     <section id="details">
@@ -819,19 +1182,14 @@
         <div class="details-container">
             <ul class="schedule-list">
                 <li class="schedule-item">
-                    <span class="time">10:00 AM</span>
+                    <span class="time">09:00 AM</span>
                     <h4>Wedding Ceremony</h4>
                     <p>Archdiocesan Shrine St. Joseph the Patriarch Parish Church</p>
                 </li>
                 <li class="schedule-item">
-                    <span class="time">2:00 PM</span>
+                    <span class="time">12:00 NN</span>
                     <h4>Reception</h4>
                     <p>Ginazel's Event Center</p>
-                </li>
-                <li class="schedule-item">
-                    <span class="time">7:30 PM</span>
-                    <h4>Post-Celebration</h4>
-                    <p>TBA</p>
                 </li>
             </ul>
 
@@ -844,32 +1202,22 @@
     <!-- RSVP SECTION (GOOGLE FORM INTEGRATION) -->
     <section id="rsvp">
         <h2 class="section-title">RSVP</h2>
-        <p class="section-subtitle">Please respond by November 15, 2026</p>
+        <p class="section-subtitle">Please respond by December 22, 2026</p>
 
         <!-- Hidden iframe to submit quietly without redirecting -->
-        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { showConfirmation(); }"></iframe>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
         <form 
             class="rsvp-form" 
             id="weddingRsvpForm" 
             action="https://docs.google.com/forms/d/e/1FAIpQLScMBE62VtxLX53CrFOl9rOPvR857XZ-801H5oXjFnFmuXdJWQ/formResponse" 
             method="POST" 
-            target="hidden_iframe" 
-            onsubmit="submitted=true;">
+            target="hidden_iframe">
             
             <div class="form-group">
                 <label for="fullName">Full Name</label>
                 <input type="text" id="fullName" name="entry.1987760998" required placeholder="e.g., Jane Doe">
             </div>
-
-            <!-- <div class="form-group">
-                <label for="attendance">Will you attend?</label>
-                <select id="attendance" name="entry.222222222" required>
-                    <option value="">Select an option</option>
-                    <option value="Joyfully Accepts">Joyfully Accepts</option>
-                    <option value="Regretfully Declines">Regretfully Declines</option>
-                </select>
-            </div> -->
 
             <div class="form-group">
                 <label for="guests">Number of Guests (including yourself)</label>
@@ -909,23 +1257,131 @@
         // Track Google Form Submission State
         let submitted = false;
 
-        function showConfirmation() {
-            document.getElementById('weddingRsvpForm').style.display = 'none';
-            document.getElementById('rsvpSuccessMessage').style.display = 'block';
+        document.getElementById('weddingRsvpForm').addEventListener('submit', () => {
+            submitted = true;
+        });
+
+        document.getElementById('hidden_iframe').addEventListener('load', () => {
+            if (submitted) {
+                document.getElementById('weddingRsvpForm').style.display = 'none';
+                document.getElementById('rsvpSuccessMessage').style.display = 'block';
+            }
+        });
+
+        // --- STANDALONE COVER PAGE & MUSIC HANDLER ---
+        const bgMusic = document.getElementById('bgMusic');
+        const musicBtn = document.getElementById('musicToggleBtn');
+        let musicStarted = false;
+
+        function openInvitation() {
+            const coverPage = document.getElementById('coverPage');
+            coverPage.classList.add('hidden');
+            
+            // Unlock main body scrolling
+            document.body.classList.remove('locked');
+
+            // Play background music satisfying browser gesture rules
+            if (!musicStarted) {
+                bgMusic.play().then(() => {
+                    musicStarted = true;
+                    musicBtn.style.opacity = '1';
+                }).catch(err => {
+                    console.log("Audio playback error:", err);
+                });
+            }
         }
 
-        // Lightbox Handler
-        function openLightbox(element) {
-            const imgSrc = element.querySelector('img').src;
+        function toggleMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicStarted = true;
+                musicBtn.style.opacity = '1';
+            } else {
+                bgMusic.pause();
+                musicBtn.style.opacity = '0.5';
+            }
+        }
+
+        // Lightbox Handler for Slideshow
+        function openLightboxFromSlide(slideElement) {
+            const activeImg = slideElement.querySelector('.active-slide img') || slideElement.querySelector('img');
+            if (!activeImg) return;
             const lightbox = document.getElementById('lightboxModal');
             const lightboxImg = document.getElementById('lightboxImg');
             
-            lightboxImg.src = imgSrc;
+            lightboxImg.src = activeImg.src;
             lightbox.style.display = 'flex';
         }
 
         function closeLightbox() {
             document.getElementById('lightboxModal').style.display = 'none';
+        }
+
+        // --- SMOOTH CROSS-FADE SLIDESHOW CONTROLLER ---
+        let slideIndex = 1;
+        let slideTimer;
+
+        function initSlideshow() {
+            const slides = document.getElementsByClassName("slide");
+            const dotsContainer = document.getElementById("slideDots");
+            
+            if (slides.length === 0) return;
+
+            // Generate dot indicators dynamically
+            dotsContainer.innerHTML = "";
+            for (let i = 0; i < slides.length; i++) {
+                const dot = document.createElement("span");
+                dot.className = "dot";
+                dot.setAttribute("onclick", `currentSlide(${i + 1})`);
+                dotsContainer.appendChild(dot);
+            }
+
+            showSlides(slideIndex);
+            startAutoSlide();
+        }
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+            resetAutoSlide();
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+            resetAutoSlide();
+        }
+
+        function showSlides(n) {
+            const slides = document.getElementsByClassName("slide");
+            const dots = document.getElementsByClassName("dot");
+            
+            if (slides.length === 0) return;
+
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active-slide");
+            }
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove("active");
+            }
+
+            slides[slideIndex - 1].classList.add("active-slide");
+            if (dots[slideIndex - 1]) {
+                dots[slideIndex - 1].classList.add("active");
+            }
+        }
+
+        function startAutoSlide() {
+            slideTimer = setInterval(() => {
+                slideIndex++;
+                showSlides(slideIndex);
+            }, 4500); // 4.5 seconds per image
+        }
+
+        function resetAutoSlide() {
+            clearInterval(slideTimer);
+            startAutoSlide();
         }
 
         // --- COUNTDOWN TIMER SCRIPT ---
@@ -953,47 +1409,10 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
-        // --- BACKGROUND MUSIC & AUTOPLAY HANDLER ---
-        const bgMusic = document.getElementById('bgMusic');
-        const musicBtn = document.getElementById('musicToggleBtn');
-        let musicStarted = false;
-
-        function startMusic() {
-            if (!musicStarted) {
-                bgMusic.play().then(() => {
-                    musicStarted = true;
-                    musicBtn.style.background = 'var(--primary-color)';
-                }).catch(err => {
-                    console.log("Autoplay blocked waiting for user interaction:", err);
-                });
-            }
-        }
-
-        function toggleMusic() {
-            if (bgMusic.paused) {
-                bgMusic.play();
-                musicStarted = true;
-                musicBtn.style.opacity = '1';
-            } else {
-                bgMusic.pause();
-                musicBtn.style.opacity = '0.5';
-            }
-        }
-
-        // Trigger playback on the first user interaction anywhere on the document
-        document.addEventListener('click', startMusic, { once: true });
-        document.addEventListener('touchstart', startMusic, { once: true });
-        document.addEventListener('scroll', startMusic, { once: true });
-
-        // Pause background music if guest plays the Save-the-Date Video
-        const prenupVideo = document.getElementById('prenupVideo');
-        if (prenupVideo) {
-            prenupVideo.addEventListener('play', () => {
-                if (!bgMusic.paused) {
-                    bgMusic.pause();
-                }
-            });
-        }
+        // Initialize slideshow on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            initSlideshow();
+        });
     </script>
 </body>
 </html>
