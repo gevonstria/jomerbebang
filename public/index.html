@@ -728,6 +728,32 @@
             font-weight: bold;
         }
 
+        /* --- GIFT GUIDE SECTION --- */
+        .gift-guide-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 3.5rem 2.5rem;
+            max-width: 750px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(59, 42, 30, 0.03);
+        }
+
+        .gift-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1.2rem auto;
+            color: var(--accent-color);
+        }
+
+        .gift-guide-card p {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
         /* --- SCHEDULE & MAP --- */
         .details-container {
@@ -918,6 +944,10 @@
             .rsvp-form {
                 padding: 1.5rem;
             }
+
+            .gift-guide-card {
+                padding: 2.5rem 1.5rem;
+            }
         }
     </style>
 </head>
@@ -960,6 +990,7 @@
             <li><a href="#about">Our Story</a></li>
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#theme">Theme</a></li>
+            <li><a href="#gift-guide">Gift Guide</a></li>
             <li><a href="#details">Event Info</a></li>
             <li><a href="#rsvp">RSVP</a></li>
         </ul>
@@ -1015,9 +1046,9 @@
         </div>
 
         <!-- HOW WE MET TIMELINE -->
-        <h2 class="section-title" style="font-size: 2rem;">How We Met</h2>
+        <h2 class="section-title" style="font-size: 2rem;">How We Met</h2> 
         <p class="section-subtitle">Our Journey Together</p>
-
+        <p class="section-subtitle"><strong>ECCLESIASTES 3:11</strong> - God's Perfect Timing <em>"He has made everything beautiful in its time."</em></p>
         <div class="story-timeline">
             <!-- Timeline Item 1 -->
             <div class="story-event">
@@ -1059,6 +1090,7 @@
 
     <!-- PRENUP GALLERY SLIDESHOW SECTION -->
     <section id="gallery">
+        <p class="section-subtitle">#JOMERAlreadyFoundHisDEStiny</p>
         <h2 class="section-title">Prenup Gallery</h2>
         <p class="section-subtitle">A glimpse into our pre-wedding moments</p>
         
@@ -1119,32 +1151,32 @@
         <div class="palette-container">
             <div class="color-swatch-card">
                 <div class="color-circle" style="background-color: #fff7e8;"></div>
-                <span class="color-name">Foam</span>
+                <span class="color-name">Cream/Ivory</span>
                 <span class="color-hex">#fff7e8</span>
             </div>
             <div class="color-swatch-card">
                 <div class="color-circle" style="background-color: #cfab71;"></div>
-                <span class="color-name">Crema</span>
+                <span class="color-name">Golden Beige</span>
                 <span class="color-hex">#cfab71</span>
             </div>
             <div class="color-swatch-card">
                 <div class="color-circle" style="background-color: #7f5e35;"></div>
-                <span class="color-name">Roast</span>
+                <span class="color-name">Coffee Brown</span>
                 <span class="color-hex">#7f5e35</span>
             </div>
             <div class="color-swatch-card">
                 <div class="color-circle" style="background-color: #713105;"></div>
-                <span class="color-name">Espresso</span>
+                <span class="color-name">Rich Dark Brown</span>
                 <span class="color-hex">#713105</span>
             </div>
             <div class="color-swatch-card">
                 <div class="color-circle" style="background-color: #4f351c;"></div>
-                <span class="color-name">Grounds</span>
+                <span class="color-name">Chocolate Brown</span>
                 <span class="color-hex">#4f351c</span>
             </div>
             <div class="color-swatch-card">
                 <div class="color-circle" style="background-color: #341100;"></div>
-                <span class="color-name">Noir</span>
+                <span class="color-name">Deep Dark Brown</span>
                 <span class="color-hex">#341100</span>
             </div>
         </div>
@@ -1152,7 +1184,7 @@
         <!-- Casual Attire Guidelines & Inspiration -->
         <div class="attire-guide">
             <h3>Casual Attire Guidelines</h3>
-            <p>We kindly request our guests to dress in casual attire matching our coffee color palette (Foam, Crema, Roast, Espresso, Grounds, and Noir).</p>
+            <p>We kindly request our guests to dress in casual attire matching our coffee color palette (Cream/Ivory, Golden Beige, Coffee Brown, Rich Dark Brown, Chocolate Brown, and Deep Dark Brown).</p>
 
             <div class="attire-cards-grid">
                 <div class="attire-card">
@@ -1179,6 +1211,25 @@
         </div>
     </section>
 
+    <!-- GIFT GUIDE SECTION -->
+    <section id="gift-guide">
+        <h2 class="section-title">Gift Guide</h2>
+        <p class="section-subtitle">A Note on Gifts</p>
+
+        <div class="gift-guide-card">
+            <div class="gift-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                    <rect x="2" y="7" width="20" height="5"></rect>
+                    <line x1="12" y1="22" x2="12" y2="7"></line>
+                    <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                    <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                </svg>
+            </div>
+            <p>As we begin our new chapter together, your love and blessings mean the world to us. There is no greater gift than the honor of your presence. However, for those who wish to give, monetary gifts are warmly appreciated.</p>
+        </div>
+    </section>
+
     <!-- EVENT DETAILS & MAP -->
     <section id="details">
         <h2 class="section-title">When & Where</h2>
@@ -1192,7 +1243,7 @@
                     <p>Archdiocesan Shrine St. Joseph the Patriarch Parish Church</p>
                 </li>
                 <li class="schedule-item">
-                    <span class="time">12:00 NN</span>
+                    <span class="time">11:30 AM</span>
                     <h4>Reception</h4>
                     <p>Ginazel's Event Center</p>
                 </li>
