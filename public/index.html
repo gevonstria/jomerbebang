@@ -755,6 +755,101 @@
             margin: 0 auto;
         }
 
+        /* --- ENTOURAGE SECTION --- */
+        .entourage-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 3.5rem 2.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(59, 42, 30, 0.03);
+        }
+
+        .entourage-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .entourage-header h3 {
+            font-size: 2.4rem;
+            font-style: italic;
+            margin-bottom: 0.25rem;
+        }
+
+        .entourage-header p {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .entourage-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .entourage-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .entourage-role-title {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.55rem;
+            color: var(--primary-color);
+            margin-bottom: 0.6rem;
+        }
+
+        .entourage-subrole-title {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.35rem;
+            color: var(--accent-color);
+            margin-bottom: 0.4rem;
+        }
+
+        .entourage-names {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .entourage-names li {
+            font-size: 0.98rem;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .entourage-two-col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .entourage-three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .entourage-col-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .entourage-divider {
+            width: 120px;
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 2rem auto;
+        }
+
         /* --- SCHEDULE & MAP --- */
         .details-container {
             display: grid;
@@ -948,6 +1043,16 @@
             .gift-guide-card {
                 padding: 2.5rem 1.5rem;
             }
+
+            .entourage-card {
+                padding: 2.5rem 1.25rem;
+            }
+
+            .entourage-two-col,
+            .entourage-three-col {
+                grid-template-columns: 1fr;
+                gap: 1.75rem;
+            }
         }
     </style>
 </head>
@@ -991,6 +1096,7 @@
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#theme">Theme</a></li>
             <li><a href="#gift-guide">Gift Guide</a></li>
+            <li><a href="#entourage">Entourage</a></li>
             <li><a href="#details">Event Info</a></li>
             <li><a href="#rsvp">RSVP</a></li>
         </ul>
@@ -1227,6 +1333,163 @@
                 </svg>
             </div>
             <p>As we begin our new chapter together, your love and blessings mean the world to us. There is no greater gift than the honor of your presence. However, for those who wish to give, monetary gifts are warmly appreciated.</p>
+        </div>
+    </section>
+
+    <!-- ENTOURAGE SECTION -->
+    <section id="entourage">
+        <h2 class="section-title">Entourage</h2>
+        <p class="section-subtitle">Those Who Stand With Us</p>
+
+        <div class="entourage-card">
+            <div class="entourage-header">
+                <h3>Alabastro - Jumawan</h3>
+                <p>Nuptials</p>
+            </div>
+
+            <!-- Parents of the Groom & Parents of the Bride -->
+            <div class="entourage-two-col">
+                <div>
+                    <h4 class="entourage-role-title">Parents of the Groom</h4>
+                    <ul class="entourage-names">
+                        <li>Mr. Honorato Alabastro</li>
+                        <li>Mrs. Flocerfida Alabastro</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="entourage-role-title">Parents of the Bride</h4>
+                    <ul class="entourage-names">
+                        <li>Mr. Ricardo Jumawan</li>
+                        <li>Mrs. Estrellita Millares</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="entourage-divider"></div>
+
+            <!-- Principal Sponsors -->
+            <div class="entourage-group">
+                <h4 class="entourage-role-title">Principal Sponsors</h4>
+                <ul class="entourage-names">
+                    <li>Mr. Marlon Rufo and Mrs. Lea Rufo</li>
+                    <li>Mr. Jose Vergara and Mrs. Liza Vergara</li>
+                    <li>Mr. Benedict Magnaye and Mrs. Maribel Magnaye</li>
+                    <li>Mr. Nestor Calingasan and Mrs. Maribel Dalangin</li>
+                    <li>Mr. June Gonzales and Mrs. Christina Gonzales</li>
+                    <li>Mr. Wency Aro and Mrs. Rosemay Benamer</li>
+                    <li>Mr. Nilo Jumawan and Mrs. Jill May Gonzales</li>
+                    <li>Mr. Jesus Alex Aurellano and Mrs. Jeaness Acquiapar</li>
+                    <li>Mr. Manuel Martinez and Mrs. Vanessa  Martinez</li>
+                    <li>Mr. Ricardo Rosales and Mrs. Esmeralda Marzan</li>
+                </ul>
+            </div>
+
+            <div class="entourage-divider"></div>
+
+            <!-- Best Man / Groomsmen & Matron of Honor / Bridesmaids -->
+            <div class="entourage-two-col">
+                <div class="entourage-col-stack">
+                    <div>
+                        <h4 class="entourage-role-title">Best Man</h4>
+                        <ul class="entourage-names">
+                            <li>Jhon Lester Soriano</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="entourage-role-title">Groomsmen</h4>
+                        <ul class="entourage-names">
+                            <li>Martin Pita</li>
+                            <li>Jayson Magnaye</li>
+                            <li>Samuel Miguel Millares</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="entourage-col-stack">
+                    <div>
+                        <h4 class="entourage-role-title">Matron of Honor</h4>
+                        <ul class="entourage-names">
+                            <li>Alicia Lajara</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="entourage-role-title">Bridesmaids</h4>
+                        <ul class="entourage-names">
+                            <li>Mary Jean Cielo</li>
+                            <li>Maia Juvia Millares</li>
+                            <li>Yvonne Bagamasbad</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="entourage-divider"></div>
+
+            <!-- Secondary Sponsors -->
+            <div class="entourage-group">
+                <h4 class="entourage-role-title">Secondary Sponsors</h4>
+                <div class="entourage-three-col" style="margin-bottom: 0; margin-top: 1rem;">
+                    <div>
+                        <h5 class="entourage-subrole-title">Candle</h5>
+                        <ul class="entourage-names">
+                            <li>John Mark Gutierrez</li>
+                            <li>Angela Padolina</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="entourage-subrole-title">Veil</h5>
+                        <ul class="entourage-names">
+                            <li>Martin Nomoto</li>
+                            <li>Kristina Mariz Millares</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="entourage-subrole-title">Cord</h5>
+                        <ul class="entourage-names">
+                            <li>Christopher Lat</li>
+                            <li>Hannah Grace Castillo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="entourage-divider"></div>
+
+            <!-- Wedding Bearers -->
+            <div class="entourage-group">
+                <h4 class="entourage-role-title">Wedding Bearers</h4>
+                <div class="entourage-three-col" style="margin-bottom: 0; margin-top: 1rem;">
+                    <div>
+                        <h5 class="entourage-subrole-title">Coin Bearer</h5>
+                        <ul class="entourage-names">
+                            <li>Nathaniel Alabastro</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="entourage-subrole-title">Bible Bearer</h5>
+                        <ul class="entourage-names">
+                            <li>Prince Cyrus Alabastro</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="entourage-subrole-title">Ring Bearer</h5>
+                        <ul class="entourage-names">
+                            <li>David Yeshua Lajara</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="entourage-divider"></div>
+
+            <!-- Flower Girls -->
+            <div class="entourage-group">
+                <h4 class="entourage-role-title">Flower Girls</h4>
+                <ul class="entourage-names">
+                    <li>Princess Annicka Mendoza</li>
+                    <li>Angelyne Doctor</li>
+                </ul>
+            </div>
         </div>
     </section>
 
